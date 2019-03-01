@@ -1,3 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
+# usado para carregar a base de dados com informaçao para testar o codigo
 #empty
+
+david:
+  name: David Fixture
+  email: david@email.com
+  password_digest: <%= User.digest('password') %>

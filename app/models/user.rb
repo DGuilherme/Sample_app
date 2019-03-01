@@ -12,4 +12,14 @@ class User < ApplicationRecord
 
   validates :password, presence: true, length: { minimum: 6 }
 
+
+#usa bcrypt via has_secure_password
+#no password create string -> que vai sofrer a açao do hash e o cost é o custo computacional para calcular o hash para testes o custo é baixo para produção é alto!!!
+
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                              BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost) 
+  end
+
 end
