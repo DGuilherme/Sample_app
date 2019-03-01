@@ -12,11 +12,11 @@ class User < ApplicationRecord
   
   has_secure_password  #metodo que permite q«guardar de forma segura a password pois usa a "password_digest" atributo da base de dados
 
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil:true
 
 
-#usa bcrypt via has_secure_password
-#no password create string -> que vai sofrer a açao do hash e o cost é o custo computacional para calcular o hash para testes o custo é baixo para produção é alto!!!
+  #usa bcrypt via has_secure_password
+  #no password create string -> que vai sofrer a açao do hash e o cost é o custo computacional para calcular o hash para testes o custo é baixo para produção é alto!!!
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def show
     @user = User.find(params[:id])
   end
@@ -9,7 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)    # Not the final implementation!
-    if @user.save
+    if @user.save                       #com informaçao invalida a tentativa de update return false
       log_in @user
       # Handle a successful save.
       
@@ -20,11 +21,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      #caso de sucesso
+      flash[:success]="Profile UPDATED"
+      redirect_to @user
+    else
+      #caso de falha
+      render 'edit'
+    end
+  end
+
+
+  #para que serve? R->
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
 end
