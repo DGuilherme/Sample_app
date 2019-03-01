@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == '1' ? remember(user) : forget(user) #é true dependendo do contexto
       
 
-      redirect_to user #?
+      redirect_back_or user #?
     else
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right! missing .now fixed
       render 'new'

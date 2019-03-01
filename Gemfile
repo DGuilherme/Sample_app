@@ -10,6 +10,14 @@ end
 gem 'rails', '~> 5.1.6'
 # para a password
 gem 'bcrypt', '3.1.12' 
+
+#Sample users
+gem 'faker',    '1.7.3'
+
+#paginação
+gem 'will_paginate', '3.1.6'
+gem 'bootstrap-will_paginate', '1.0.0'
+
 # Makin a boottrap 
 gem 'bootstrap-sass', '3.3.7'
 # Use Puma as the app server
