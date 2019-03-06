@@ -1,18 +1,11 @@
-
-  CarrierWave.configure do |config|
-    if Rails.env.development?
-      config.storage = :file
-    elsif Rails.env.test?
-      config.storage = :file
-      config.enable_processing = false
-    else
-      config.storage = :aws
-      config.aws_bucket = Rails.configuration.files.aws_bucket
-      config.aws_acl = 'public-read'
-      config.aws_credentials = {
-        access_key_id: Rails.configuration.aws.access_key_id,
-        secret_access_key: Rails.configuration.aws.secret_access_key,
-        region: Rails.configuration.aws.region,
+if Rails.env.production?
+    CarrierWave.configure do |config|
+      config.fog_credentials = {
+        # Configuration for Amazon S3
+        :provider              => 'AWS',
+        :aws_access_key_id     => ENV['S3_ACCESS_KEY'],
+        :aws_secret_access_key => ENV['S3_SECRET_KEY']
       }
+      config.fog_directory     =  ENV['S3_BUCKET']
     end
   end
